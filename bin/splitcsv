@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'splitcsv'
+
+if (ARGV[0] == nil)
+  puts 'Usage: splitcsv <file> [<maxlength> [<separator>]]'
+  exit
+end
+
+if (File.exists?(ARGV[0]) == false)
+  puts "Could not open file '#{ARGV[0]}'"
+  exit
+end
+
+csv_maxlength    = ARGV[1] || 5000
+csv_colseparator = ARGV[2] || ";"
+
+splitter = SplitCSV::SplitCSV.new
+splitter.split(ARGV[0], csv_maxlength, csv_colseparator)
