@@ -19,7 +19,7 @@ module SplitCSV
         CSV.open("#{csv_dir}/#{csv_basename}_#{i+1}.csv", 'w', :row_sep => :auto, :col_sep => separator) do |csv|
           csv << firstline
 
-          for j in 0..maxlength do
+          for j in 0..maxlength.to_i do
             if (line = csv_obj.readline) != nil
               csv << line
             end
