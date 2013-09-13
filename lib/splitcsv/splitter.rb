@@ -8,7 +8,7 @@ module SplitCSV
       csv_dir      = File.dirname(csv_path)
 
       csv_obj      = CSV.open(csv_path, :row_sep => :auto, :col_sep => separator)
-      csv_length   = csv_obj.readlines.size
+      csv_length   = csv_obj.readlines.size - 1;
 
       # Opnieuw inlezen zodat readline pointer terug aan 0 staat. Na gebruiken van
       # csv_obj.readlines.size werd "csv_obj" al eens volledig doorlopen
@@ -16,10 +16,12 @@ module SplitCSV
       firstline    = csv_obj.readline
 
       for i in 0..((csv_length / maxlength.to_i).ceil) do
+        puts i
+
         CSV.open("#{csv_dir}/#{csv_basename}_#{i+1}.csv", 'w', :row_sep => :auto, :col_sep => separator) do |csv|
           csv << firstline
 
-          for j in 0..maxlength.to_i do
+          for j in 1..maxlength.to_i do
             if (line = csv_obj.readline) != nil
               csv << line
             end
