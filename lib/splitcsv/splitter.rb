@@ -16,8 +16,6 @@ module SplitCSV
       firstline    = csv_obj.readline
 
       for i in 0..((csv_length / maxlength.to_i).ceil) do
-        puts i
-
         CSV.open("#{csv_dir}/#{csv_basename}_#{i+1}.csv", 'w', :row_sep => :auto, :col_sep => separator) do |csv|
           csv << firstline
 
